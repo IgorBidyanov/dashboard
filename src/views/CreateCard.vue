@@ -3,24 +3,30 @@
     <div class="createCard__form">
       <h2 class="createCard__title">Создание новой карточки</h2>
       <form @submit.prevent="submitForm">
-        <label class="createCard__label" for="title">Заголовок:</label>
-        <input
-          v-model="title"
-          class="createCard__input"
-          :class="{ error: titleError }"
-          type="text"
-          id="title"
-          maxlength="25"
-        />
+        <div class="createCard__form-item">
+          <label class="createCard__label" for="title">Заголовок:</label>
+          <input
+            v-model="title"
+            class="createCard__input"
+            :class="{ error: titleError }"
+            type="text"
+            id="title"
+            maxlength="25"
+          />
+          <p class="createCard__error">{{ titleError }}</p>
+        </div>
 
-        <label class="createCard__label" for="description">Описание:</label>
-        <textarea
-          v-model="description"
-          class="createCard__input"
-          :class="{ error: descriptionError }"
-          id="description"
-          rows="5"
-        ></textarea>
+        <div class="form__item">
+          <label class="createCard__label" for="description">Описание:</label>
+          <textarea
+            v-model="description"
+            class="createCard__input"
+            :class="{ error: descriptionError }"
+            id="description"
+            rows="5"
+          ></textarea>
+          <p class="createCard__error">{{ descriptionError }}</p>
+        </div>
 
         <div class="createCard__form-buttons">
           <Button type="submit">Добавить</Button>
@@ -93,10 +99,18 @@ const submitForm = (): void => {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 32px;
     width: 50vw;
+
+    &-item {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__item {
+    margin-bottom: 24px;
   }
 
   &__title {
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     font-size: 24px;
     font-weight: 600;
     text-align: center;
@@ -112,15 +126,20 @@ const submitForm = (): void => {
   &__input {
     width: 100%;
     padding: 8px 12px;
-    margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
     font-family: inherit;
 
     &.error {
+      margin-bottom: 12px;
       border-color: red;
     }
+  }
+
+  &__error {
+    color: red;
+    font-size: 12px;
   }
 
   &__form-buttons {
